@@ -594,11 +594,11 @@ def single_dimer_gen_fn(Match, m):
     return gen
 
 
-H1 = Hexagon(3, 3, 3, 1, 1,1, nodes = False, nlist = [0,1,2,3,4,5])
+H1 = Hexagon(2,2,2, 1, 1,1, nodes = False, nlist = [0,1,4,5])
 #H1= Hexagon(2,2,2, 2,2, 1, nodes=False,nlist = [0,1,3,4,7,8])
 A = H1.matrix
 M1 = Matching(H1,A)
-single_dimer_gen_fn(M1, 30)
+single_dimer_gen_fn(M1, 10)
 
 
 #Hexagon with nodes (with dangling edges where 1 and 6 should be)
