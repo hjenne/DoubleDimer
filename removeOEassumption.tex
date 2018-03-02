@@ -1,0 +1,93 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem*{conj*}{Conjecture}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+
+\title{Brief Article}
+\author{The Author}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+%\section{}
+%\subsection{}
+
+Let $\mathcal{G}$ be a bipartite planar graph with a set of vertices ${\bf N}$ on its outer face numbered $1, \ldots, 2n$ called nodes. Assuming that $\mathcal{G}$ has the property that the odd-numbered nodes are black and the even-numbered nodes are white, Kenyon and Wilson prove the following. 
+
+\begin{lemma*}[Lemma 3.2, KW 2006]
+Let $S$ be a balanced subset of $\{1, \ldots, 2n\}$. Then
+$$\dfrac{Z^{D}(S) Z^{D}(S^{c})}{(Z^{D})^{2}} = 
+\det[(1_{i, j \in S} + 1_{i, j \notin S}) \times (-1)^{(|i - j| -1)/2} X_{i, j} ]^{i = 1, 3, \ldots, 2n-1}_{j = 2, 4, \ldots, 2n}$$
+\end{lemma*}
+
+If we do not assume that $\mathcal{G}$ has the property that the odd-numbered nodes are black and the even-numbered nodes are white, we have the following conjecture:
+
+\begin{conj*}
+Let $\mathcal{G}$ be a bipartite planar graph with set of nodes $\{1, 2, \ldots, 2n\}$. Let $S$ be a balanced subset of $\{1, \ldots, 2n\}$. Then 
+$$\dfrac{Z^{D}(\mathcal{G} \setminus S) Z^{D}(\mathcal{G} \setminus S^{c})}{(Z^{D}(\mathcal{G})^{2}} = 
+\det \left[(1_{i, j \in S} + 1_{i, j \notin S}) \times \text{sign}(i, j, S) \dfrac{Z^{D}(\mathcal{G}_{i, j})}{Z^{D}(\mathcal{G})} \right]^{i = b_1, b_2, \ldots, b_n}_{j = w_1, w_2, \ldots, w_n}$$
+where $b_1, b_2, \ldots, b_n$ are the black nodes of $\{1, 2, \ldots, 2n\}$ listed in ascending order,$w_1, w_2, \ldots, w_n$ are the white nodes of $\{1, 2, \ldots, 2n\}$ listed in ascending order, and $\text{sign}(i, j, S) = 1$ or $-1$ depending on $i, j,$ and $S$. 
+\end{conj*}
+
+\begin{proof}
+Let $K$ be a Kasteleyn matrix of $\mathcal{G}$. Then the signs of the edges $\mathcal{G}$ are so that there are an odd number of $-$ signs if the face has 0 mod 4 edges and an even number of $-$ signs if the face has 2 mod 4 edges. 
+Let $(w_1, b_1), \ldots, (w_k, b_k)$ be any noncrossing pairing of the nodes of $S$, where $w_1, \ldots, w_k$ are the white nodes of $S$ and $b_1, \ldots b_k$ are the black nodes of $S$ (such a noncrossing pairing always exists since $S$ is a balanced subset). 
+Adjoin edges $e_i$ of weight $W$ to the outer face connecting $w_i$ to $b_i$ for $1 \leq i \leq k$. (What if two nodes are adjacent, and doing this creates a multigraph?). We claim that we can choose a weight for each $e_i$ that retains the Kasteleyn sign condition. 
+
+To see this, first observe that adjoining the edge $e_1$ creates exactly two new faces, since $w_1$ and $b_1$ are on the outer face (i.e. the face bounding the infinite region) of $\mathcal{G}$. Let $p$ and $q$ be the two paths from $w_1$ to $b_1$ consisting of edges along the outer face of $\mathcal{G}$. Observe that $p$ and $q$ must both have odd length, since $w_1$ and $b_1$ are different colors. There are two different cases, depending on whether the outer face of $\mathcal{G}$ has 0 mod 4 edges or 2 mod 4 edges. 
+\begin{enumerate}
+\item The outer face of $\mathcal{G}$ has 0 mod 4 edges. \\
+When the outer face of $\mathcal{G}$ has 0 mod 4 edges, one of the paths $p$ or $q$ must have length $4 \ell + 1$ for some $\ell$ and the other path must have length $4 j + 3$ for some $j$. Assume without loss of generality that $p$ has length $4 \ell + 1$ for some $\ell$. Since the outer face of $\mathcal{G}$ has 0 mod 4 edges, the product of the signs of the edges of the outer face of $\mathcal{G}$ is $-1$. This means that either the product of the signs of the edges of $p$ is 1 and the product of the signs of the edges of $q$ is $-1$, or the product of the signs of the edges of $p$ is $-1$ and the product of the signs of the edges of $q$ is $1$. So there are two cases: 
+\begin{enumerate}
+\item The product of the signs of the edges of $p$ is $1$. \\
+Since the face bounded by the path $p$ and the edge $e_1$ has 2 mod 4 edges, give $e_1$ sign $1$. Then since the product of the signs of the edges of $q$ is $-1$, the face bounded by the path $q$ and the edge $e_1$ has 0 mod 4 edges and an odd number of $-$ signs.
+\item The product of the signs of the edges of $p$ is $-1$.\\
+Since the face bounded by the path $p$ and the edge $e_1$ has 2 mod 4 edges, give $e_1$ sign $-1$. Then since the product of the signs of the edges of $q$ is 1, the face bounded by the path $q$ and the edge $e_1$ has 0 mod 4 edges and an odd number of $-$ signs. 
+\end{enumerate}
+\item The outer face of $\mathcal{G}$ has 2 mod 4 edges. 
+When the outer face of $\mathcal{G}$ has 2 mod 4 edges, either both $p$ and $q$ have length 1 mod 4 or both $p$ and $q$ have length 3 mod 4. 
+Since the outer face of $\mathcal{G}$ has 2 mod 4 edges, the outer face has an even number of $-$ signs. This means that either both $p$ and $q$ have an even number of $-$ signs or both $p$ and $q$ have an odd number of minus signs. So there are several cases: 
+\begin{enumerate}
+\item $p$ and $q$ have length 1 mod 4
+In this case, both the face bounded by the path $p$ and the edge $e_1$ and the face bounded by the path $q$ and the edge $e_1$ have 2 mod 4 edges. 
+\begin{enumerate}
+\item $p$ and $q$ both have an even number of $-$ signs
+Give $e_1$ sign $1$. Then both new faces have an even number of $-$ signs. 
+\item $p$ and $q$ both have an odd number of $-$ signs
+Give $e_1$ sign $-1$. Then both new faces have an even number of $-$ signs. 
+\end{enumerate}
+\item $p$ and $q$ have length 3 mod 4
+In this case, both the face bounded by the path $p$ and the edge $e_1$ and the face bounded by the path $q$ and the edge $e_1$ have 0 mod 4 edges. 
+\begin{enumerate}
+\item $p$ and $q$ both have an even number of $-$ signs
+Give $e_1$ sign $-1$. Then both new faces have an odd number of $-$ signs. 
+\item $p$ and $q$ both have an odd number of $-$ signs
+Give $e_1$ sign $1$. Then both new faces have an odd number of $-$ signs. 
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+So in all cases we have chosen the sign for $e_1$ so that the resulting graph still satisfies the Kasteleyn sign condition. By induction, we can add choose a sign for each $e_i$ so that the resulting graph satisfies the Kasteleyn sign condition. Let $K_{W}$ be the matrix defined as follows: $(K_{W})_{s, t} = \text{sign}(e_i) W$ if $(s, t) = (w_{i}, b_{i})$ for some $i$, and $(K_{W})_{s, t} = (K)_{s, t}$ otherwise. By construction, if $K_{0} := K_{W} |_{W = 0}$, then $K_0 = K$. 
+ Reorder the columns of $K_{W}$ so that $w_1, \ldots, w_k$ are the first $k$ rows and $b_1, \ldots, b_k$ are the first $k$ columns. Since $K$ is a Kasteleyn matrix of $G$ and we chose signs of $e_i$ to retain the Kasteleyn sign condition, $Z^{D}(\mathcal{G} \setminus S) = \pm [W^{k}] \det(K_{W})$. 
+We see that
+$$\dfrac{ Z^{D}(\mathcal{G} \setminus S)}{Z^{D}(\mathcal{G})} = \dfrac{ [W^{k}] \det(K_{W}) }{[W^{0}] \det K_{W}}$$
+Then
+$$ \dfrac{ [W^{k}] \det(K_{W}) }{[W^{0}] \det K_{W}} = \pm \dfrac{ \det K_{\setminus S} }{ \det K }$$
+how to determine sign here?
+Not sure why any of this is necessary if I can't keep track of the sign. 
+is $Z^{D}(\mathcal{G} \setminus S) = \pm \det (K_{\setminus S})$? Maybe not because although both $\mathcal{G}$ and $\mathcal{G} \setminus S$ have Kasteleyn matrices, if we let $K$ be the Kasteleyn matrix for $\mathcal{G}$, its not necessarily the case that the Kasteleyn matrix for $\mathcal{G} \setminus S$ is $K_{\setminus S}$. 
+
+\end{proof}
+
+\end{document}  
