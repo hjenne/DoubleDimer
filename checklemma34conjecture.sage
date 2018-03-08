@@ -97,4 +97,4 @@ def check_all_pairings(n):
 
 
 
-check_all_pairings(14)
+check_all_pairings(16)
