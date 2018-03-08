@@ -266,13 +266,15 @@ def make_lemma32_matrix(G, outerfacelist, nodelist, S, labels=True):
 				j = nodelist.index(vertexj) + 1
 				sgn = find_sign(outerfacelist, vertexi, vertexj)
 				#if ((i - j) % 2 ) == 1: 
-					#sgn = ((-1)^((abs(i-j) -1)/2))
-				#elif ((i - j) % 2 ) == 0: 
-					#sgn = ((-1)^(int((abs(i-j)-1)/2)))
+				#	sgn = ((-1)^((abs(i-j) -1)/2))
+				#elif (i % 2 == 1) and (j % 2 == 1): 
+				#	sgn = ((-1)^(abs(i-j)/2))
+				#elif (i % 2 == 0) and (j % 2 == 0): 
+				#	sgn = ((-1)^((abs(i-j)-2)/2))
 				matrix[(r, c)] = sgn*Z(H)
 	m = len(rowlist)
 	M = Matrix(m, m, matrix)
-	print M
+	#print M
 	return det(M)
 
 
@@ -392,31 +394,31 @@ def check_lemma32_allsubsets(G, outerfacelist, nodelist):
 
 
 #Example without odd-even assumption
-#G = graphs.GridGraph([5,4])
-#G.show()
-#G.weighted(True)
-#G = add_edge_weights(G) 
-#outerfacelist = outer_face_list(5, 4)
-#nodelist = node_list(G, 5, 4, {1:1, 2:1, 3:0, 4:0, 5:1, 6:1, 7:0, 8:0})
-#print nodelist
-#print check_lemma32_allsubsets(G, outerfacelist, nodelist)
+G = graphs.GridGraph([5,4])
+G.show()
+G.weighted(True)
+G = add_edge_weights(G) 
+outerfacelist = outer_face_list(5, 4)
+nodelist = node_list(G, 5, 4, {1:1, 2:1, 3:0, 4:0, 5:1, 6:1, 7:0, 8:0})
+print nodelist
+print check_lemma32_allsubsets(G, outerfacelist, nodelist)
 #print check_lemma32(G, outerfacelist, nodelist, [1,7],labels = True)
 
 
 
-G = graphs.GridGraph([4,4])
-G.show()
-nodelist = [(1, 0), (3, 0), (3,3), (1,3),(0, 3),(0,2)]
-Slist = make_S(G, nodelist, [2, 3, 4, 5])
-H = delete_S(G, Slist)
-H.show()
-print len(list(H.perfect_matchings()))
-for matching in H.perfect_matchings(labels=True):
-	K = deepcopy(H)
-	for e in K.edges():
-		if e not in matching:
-			K.delete_edge(e)
-	K.show()
+#G = graphs.GridGraph([4,4])
+#G.show()
+#nodelist = [(1, 0), (3, 0), (3,3), (1,3),(0, 3),(0,2)]
+#Slist = make_S(G, nodelist, [2, 3, 4, 5])
+#H = delete_S(G, Slist)
+#H.show()
+#print len(list(H.perfect_matchings()))
+#for matching in H.perfect_matchings(labels=True):
+	#K = deepcopy(H)
+	#for e in K.edges():
+	#	if e not in matching:
+	#		K.delete_edge(e)
+	#K.show()
 
 
 
