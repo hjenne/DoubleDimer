@@ -12,9 +12,17 @@
 \usepackage{amsthm}
 
 \theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{defn*}{Definition}
 \newtheorem*{conj*}{Conjecture}
 \newtheorem{lemma}{Lemma}
+\newtheorem*{cor*}{Corollary}
+\newtheorem{cor}{Corollary}
 \newtheorem*{lemma*}{Lemma}
+\newtheorem*{note*}{Note}
+\newtheorem{note}{Note}
+
+\newcommand{\sgn}{\text{sgn}}
 
 \title{Brief Article}
 \author{The Author}
@@ -24,7 +32,61 @@
 %\section{}
 %\subsection{}
 
-Let $\mathcal{G}$ be a bipartite planar graph with a set of vertices ${\bf N}$ on its outer face numbered $1, \ldots, 2n$ called nodes. Assuming that $\mathcal{G}$ has the property that the odd-numbered nodes are black and the even-numbered nodes are white, Kenyon and Wilson prove the following. 
+
+
+\begin{defn*}
+Let $\mathcal{G}$ be a finite edge-weighted bipartite planar graph with a set {\bf N} of $2n$ special vertices called nodes on the outer face labeled $1, 2, \ldots, 2n$ in counterclockwise order. A double-dimer configuration on $(\mathcal{G}, {\bf N})$ is a configuration of disjoint loops, doubled edges, and simple paths that connect the nodes in pairs. Each configuration is weighted by the product of its edge-weights times $2^{\ell}$, where $\ell$ is the number of loops in the configuration.
+\end{defn*}
+
+
+
+\begin{defn*}
+Let $\mathcal{G}^{BW}$ be the subgraph of $\mathcal{G}$ formed by deleting the nodes except for the ones that are black and odd or white and even. Let $\mathcal{G}^{BW}_{i, j}$ be defined as $\mathcal{G}^{BW}$ was, but with node $i$ included in $\mathcal{G}^{BW}_{i, j}$ if and only if it was not included in $\mathcal{G}^{BW}$, and similarly for node $j$. Let $Z^{BW}$ and $Z^{BW}_{i, j}$ be the weighted sum of dimer configurations of dimer configurations of $\mathcal{G}^{BW}$ and $\mathcal{G}^{BW}_{i, j}$, respectively. Define $Z^{WB}$ and $Z^{WB}_{i, j}$ similarly but with the roles of black and white reversed.
+\end{defn*}
+
+
+For each planar matching of the nodes $\sigma$, let $\text{Pr}(\sigma)$ be the probability that a random double-dimer configuration has pairing $\sigma$. Kenyon and Wilson showed that assuming all of the nodes are black and odd or white and even,  $\widehat{ \text{Pr} }(\sigma) := \text{Pr}(\sigma) \dfrac{ Z^{WB}}{Z^{BW}}$ is an integer coefficient  polynomial in the quantities $X_{i, j} := Z^{BW}_{i, j}/Z^{BW}$.
+
+
+\begin{note*}
+They assume that all odd nodes of $\mathcal{G}$ are black and all even nodes are white.
+\end{note*}
+
+\begin{defn*}
+If $S$ is a balanced subset of nodes, that is, a subset containing an equal number $k$ of white and black nodes. Let $Z^{D}(S) = Z^{D}( \mathcal{G} \setminus S)$ be the weighted sum of dimer covers of $\mathcal{G} \setminus S$. Let $S^{c} = {\bf N} \setminus S$.
+\end{defn*}
+
+\begin{lemma*} [Lemma 3.1, KW 2006]
+$Z^{D}(S) Z^{D}(S^{c})$ is a sum of double-dimer configurations for all connection topologies $\pi$ for which $\pi$ connects no element of $S$ to an element of $S^{c}$. That is,
+$$Z^{D}(S) Z^{D}(S^{c}) = Z^{DD} \sum\limits_{\pi} M_{S, \pi} \Pr (\pi)$$
+where $M_{S, \pi}$ is 0 or 1 according to whether $\pi$ connects nodes in $S$ to $S^{c}$ or not.
+\end{lemma*}
+
+Let $G$ be a graph with node set ${\bf N}$ that does not necessarily have the property that odd nodes of $\mathcal{G}$ are black and all even nodes are white. Let $M \subseteq N$ be the set of nodes that are odd and white or even and black.
+Let $\tilde{G}$ be $G$ with an extra vertex and edge with weight 1 added to each node in $M$. So all of the nodes in $\tilde{G}$ are black and odd or white and even.
+
+Additionally, assume that $G$ has an equal number of black and white nodes and $\tilde{G}$ has an equal number of black and white nodes. These two assumptions imply that $M$ is a balanced subset. Note that
+$$Z^{D}(\tilde{G} \setminus S) = Z^{D}(G \setminus (S \cap M^{c} ) \cup (M \cap S^{c}) )$$
+
+Then Lemma 3.1 says that
+
+\begin{cor*}[Corollary to Lemma 3.1]
+Let $S$ be a balanced subset of nodes. \\
+$Z^{D}(G \setminus (S \cap M^{c} ) \cup (M \cap S^{c})) Z^{D}(G \setminus (S^{c} \cap M^{c} ) \cup (M \cap S))$ is a sum of double-dimer configurations for all connection topologies $\pi$ for which $\pi$ connects no element of $S$ to an element of $S^{c}$. That is,
+$$Z^{D}(G \setminus (S \cap M^{c} ) \cup (M \cap S^{c})) Z^{D}(G \setminus (S^{c} \cap M^{c} ) \cup (M \cap S)) = Z^{DD}(G) \sum\limits_{\pi} M_{S, \pi} \Pr (\pi)$$
+where $M_{S, \pi}$ is 0 or 1 according to whether $\pi$ connects nodes in $S$ to $S^{c}$ or not.
+\end{cor*}
+
+If $T = (S \cap M^{c}) \cup (M \cap S^{c})$, then $S = (T \cap M^{c}) \cup (M \cap T^{c})$, so:
+
+\begin{cor*}[Corollary to Lemma 3.1]
+Let $T$ be a balanced subset of nodes.
+$Z^{D}(T) Z^{D}(T^{c})$ is a sum of all connection topologies $\pi$ for which $\pi$ connects no elements of $(T \cap M^{c}) \cup (M \cap T^{c})$ to $\left((T \cap M^{c}) \cup (M \cap T^{c})\right)^{c}$. That is
+$$Z^{D}(G \setminus T) Z^{D}(G \setminus T^{c}) = Z^{DD}(G) \sum\limits_{\pi} M_{(T \cap M^{c}) \cup (M \cap T^{c}), \pi} \Pr (\pi)$$
+where $M_{(T \cap M^{c}) \cup (M \cap T^{c}), \pi}$ is 0 or 1 depending on whether $\pi$ connects nodes in $(T \cap M^{c}) \cup (M \cap T^{c})$ to $\left((T \cap M^{c}) \cup (M \cap T^{c})\right)^{c}$.
+\end{cor*}
+
+Assuming that $\mathcal{G}$ has the property that the odd-numbered nodes are black and the even-numbered nodes are white, Kenyon and Wilson prove the following. 
 
 \begin{lemma*}[Lemma 3.2, KW 2006]
 Let $S$ be a balanced subset of $\{1, \ldots, 2n\}$. Then
@@ -89,5 +151,32 @@ Not sure why any of this is necessary if I can't keep track of the sign.
 is $Z^{D}(\mathcal{G} \setminus S) = \pm \det (K_{\setminus S})$? Maybe not because although both $\mathcal{G}$ and $\mathcal{G} \setminus S$ have Kasteleyn matrices, if we let $K$ be the Kasteleyn matrix for $\mathcal{G}$, its not necessarily the case that the Kasteleyn matrix for $\mathcal{G} \setminus S$ is $K_{\setminus S}$. 
 
 \end{proof}
+
+Recall that the cross of a pairing is a set of two parts ${a, c}$ and ${b, d}$ of $\rho$ such that $a < b < c < d$. 
+Kenyon and Wilson define the parity of an odd-even pairing $\rho = ((1, w_1), (3, w_2), \ldots, (2n-1, w_n))$ to be the parity of the permutation $(w_1/2)(w_2/2)\ldots(w_n/n)$. Then they prove the following
+
+\begin{lemma*}[Lemma 3.4, KW 2006]
+For odd-even pairings $\rho$, 
+$$(-1)^{\text{parity of } \rho} \prod\limits_{(i, j) \in \rho} (-1)^{(|i-j|-1)/2} = (-1)^{\# \text{ crosses of } \rho}$$
+\end{lemma*}
+
+Any pairing on $2n$ elements $\rho$ can be written $\rho = ((i_1, j_1), (i_2, j_2), \ldots, (i_n, j_n))$ so that $i_k < j_k$ for all $k$ and $i_1 < i_2 < \cdots < i_n$. We define $\sgn(\rho)$ to be the parity of the permutation $j_1 j_2 \ldots j_n$, when $j_1, \ldots j_n$ are relabeled with the labels $1, \ldots, n$ so that $\min_{1 \leq k \leq n} \{j_{k} \}$ is relabeled 1, $\ldots$, $\max_{1 \leq k \leq n} \{j_{k} \}$ is relabeled $n$.
+
+\begin{conj*}
+For any pairing $\rho$, 
+$$\sgn(\rho) \prod\limits_{(i, j) \in \rho} f(i, j) =  (-1)^{\# \text{ crosses of } \rho}$$
+where $f(i, j)$ is defined as follows: 
+$$f(i, j) = \begin{cases} 
+(-1)^{(|i-j| -1)/2} & \mbox{ if $i, j$ are different parity} \\
+(-1)^{|i-j|/2} & \mbox{if $i, j$ are both odd} \\
+(-1)^{(|i-j|-2)/2} & \mbox{if $i, j$ are both even} \\
+\end{cases}$$
+\end{conj*}
+
+\begin{note*}
+This conjecture has been checked for all pairings on 4, 6, 8, 10, 12, and 14 elements. 
+\end{note*}
+
+
 
 \end{document}  
