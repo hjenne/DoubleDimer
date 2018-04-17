@@ -11,6 +11,8 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
+\usepackage{stackengine}
+
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
 \newtheorem*{defn*}{Definition}
@@ -152,6 +154,25 @@ is $Z^{D}(\mathcal{G} \setminus S) = \pm \det (K_{\setminus S})$? Maybe not beca
 
 \end{proof}
 
+
+\begin{conj*}
+Let $\mathcal{G}$ be a bipartite planar graph with set of nodes $\{1, 2, \ldots, 2n\}$. Assume that $G$ has the property that the nodes alternate between black and white except for in two places, i.e. there are exactly two pairs of consecutive nodes that are both the same color: $(s, s+1)$, $(u,u+1)$. Assume without loss of generality that $s$ and $s+1$ are both black and $u$ and $u+1$ are both white. Let $S$ be a balanced subset of $\{1, \ldots, 2n\}$. Then 
+$$\dfrac{Z^{D}(\mathcal{G} \setminus S) Z^{D}(\mathcal{G} \setminus S^{c})}{(Z^{D}(\mathcal{G})^{2}} = \pm
+\det \left[(1_{i, j \in S} + 1_{i, j \notin S}) \times \text{sign}(i, j) \dfrac{Z^{D}(\mathcal{G}_{i, j})}{Z^{D}(\mathcal{G})} \right]^{i = b_1, b_2, \ldots, b_n}_{j = w_1, w_2, \ldots, w_n}$$
+where $b_1, b_2, \ldots, b_n$ are the black nodes of $\{1, 2, \ldots, 2n\}$ listed in ascending order,$w_1, w_2, \ldots, w_n$ are the white nodes of $\{1, 2, \ldots, 2n\}$ listed in ascending order, and $\text{sign}(i, j) = (-1)^{(|b-w| -1)/2}$ if $b$ and $w$ are different parity and $\text{sign}(i, j) = (-1)^{|b-w|/2}$ if $b$ and $w$ are the same parity. If $i < s$ and $j > u$ or $j < s$ and $i < u$, $\text{sign}(i, j) = (-1)^{(|b-w| +1)/2}$ if $b$ and $w$ are different parity.
+\end{conj*}
+
+
+\begin{proof}
+Without loss of generality (by rotating if necessary) we assume that $s = 1$.
+Following the proof of Lemma 3.2 in Kenyon and Wilson, for convenience we adjoin to the graph $\mathcal{G}$ $2n-2$ edges as follows: we
+connect nodes 2 and 3, 3 and 4, 4 and 5, $\ldots$, $u-1$ and $u$ with an edge, and we connect $u+1$ and $u+2$, $u+2$ and $u+3$, $\ldots$, $2n$ and $1$ with an edge. The resulting graph is still bipartite by the assumption that the nodes alternate between black and white except for the nodes $1$ and $2$ and the nodes $u$ and $u+1$. Now add four more edges as follows. Since $G$ is bipartite, there is a white vertex $t$ on the outer face of $G$ between nodes $1$ and $2$ and a black vertex $v$ on the outer face of $G$ between nodes $u$ and $u+1$. Add edges connecting nodes $1$ and $t$ and $t$ and $2$, and edges connecting nodes $u$ and $v$ and $v$ and $u+1$. Give the $2n+2$ edges we have added weight 0 (or weight $\epsilon$ and then take the limit $\epsilon \to 0$.) Given a Kasteleyn matrix of a graph, the signs of edges incident to a vertex may be reversed, and each face will still have a correct number of minus signs. For each $i = 2, 3, \ldots, u-1$, in order, if the edge from node $i$ to node $i+1$ has a minus sign, reverse the signs of all edges incident to node $i+1$. Do the same for the edge from node $u$ to $v$, the edge from $v$ to $u+1$, and the edges from node $i$ to node $i +1$ for $i = u+1, \ldots, 2n-1$. Do the same for the edge from node $2n$ to $1$ and the edge from $1$ to $t$. Then the sign of the remaining edge from $t$ to $1$ will be $(-1)^n$ (?) for the outer face to have the correct number of $-$ signs. 
+
+Let $(w_1, b_1), \ldots, (w_k, b_k)$ be any noncrossing pairing of the nodes of $S$, where $w_1, \ldots, w_k$ are the white nodes of $S$ and $b_1, \ldots, b_k$ are the black nodes of $S$. Adjoin edges of weight $W$ connecting $w_i$ to $b_i$ for $1 \leq i \leq k$. To retain the Kasteleyn sign condition, the sign of a new edge connecting black node $b$ and white node $w$ should be $(-1)^{(|b-w|-1)/2}$ if $b$ and $w$ have different parity, and $(-1)^{(|b-w|)/2}$ if $b$ and $w$ have the same parity. For if nodes $b$ and $w$ have different parity, we must have $2 \leq b, w \leq u$ or $u+1 \leq w \leq 2n$ and $u+1 \leq b \leq 2n$ unless $b = 1$. Then because of the edges added in the previous paragraph, the sign of the new edge connecting $b$ and $w$ should be $(-1)^{(|b-w|-1)/2}$. If nodes $b$ and $w$ have the same parity, then this means that either $2 \leq w \leq u$ and $u+1 \leq b \leq 2n$ or $u = 1$, or $2 \leq b \leq u$ and $u+1 \leq w \leq 2n$. In this case, because of the edges between $u$ and $v$ and $v$ and $u+1$, the sign of the new edge connecting $b$ and $w$ should be $(-1)^{(|b-w|)/2}$. 
+
+Rest of the proof of Lemma 3.2 should go through until the part about the global sign. 
+\end{proof}
+
 Recall that the cross of a pairing is a set of two parts ${a, c}$ and ${b, d}$ of $\rho$ such that $a < b < c < d$. 
 Kenyon and Wilson define the parity of an odd-even pairing $\rho = ((1, w_1), (3, w_2), \ldots, (2n-1, w_n))$ to be the parity of the permutation $(w_1/2)(w_2/2)\ldots(w_n/n)$. Then they prove the following
 
@@ -176,6 +197,26 @@ $$f(i, j) = \begin{cases}
 \begin{note*}
 This conjecture has been checked for all pairings on 4, 6, 8, 10, 12, and 14 elements. 
 \end{note*}
+
+Observe that if $\sigma$ is an odd-even pairing on $2n$ elements, then $\sigma$ can be viewed as a map from the odd integers $1, \ldots, 2n-1$ to the even integers. A pairing $\tau$ can be viewed as a map from the even integers to the integers. If we relabel $\tau(\sigma(1)) \tau(\sigma(3)) \cdots \tau(\sigma(2n-1))$ so that the smallest number is labeled with $1$, the second smallest with 2, and so on, then we have a permutation on $n$ integers that we can find the sign of. 
+
+\begin{conj*}
+When a graph G with six nodes is colored as follows: Nodes 1, 4, and 5 are black and nodes 2, 3, and 6 are white, then
+\begin{itemize}
+\item $\footnotesize{\stackanchor{1}{2} } \big{|} \footnotesize{\stackanchor{4}{6} } \big{|} \footnotesize{\stackanchor{5}{3} } \equiv
+\footnotesize{\stackanchor{1}{2} } \big{|} \footnotesize{\stackanchor{3}{4} } \big{|} \footnotesize{\stackanchor{5}{6} }  -  
+\footnotesize{\stackanchor{1}{2} } \big{|} \footnotesize{\stackanchor{3}{6} } \big{|} \footnotesize{\stackanchor{5}{4} } $
+\item $13| 24 | 56 \equiv 12|34|56 - 14|32|56$
+\item $13 | 25 | 46 \equiv 12| 34 | 56 - 12| 36 | 54 - 14| 32 | 56 + 16 | 32 | 54$
+\item $16 | 24 | 35 \equiv - 16| 32 | 54 + 16 | 34 | 52$
+\end{itemize}
+\end{conj*}
+
+\begin{note*}
+Idea for proof of first bullet: for any odd-even pairing $\rho$, $\langle \rho, LHS \rangle_{2} = 2^2$ or $2$, depending on whether 1 and 2 are paired in the odd-even pairing or not. If 1 and 2 are paired in the odd-even pairing, $\langle \rho, RHS \rangle_{2} = 2^3 - 2^2 = 2^2$ or $\langle \rho, RHS \rangle_{2} = -2^2$. If $1$ and $2$ are not paired in the odd-even pairing, $\langle \rho, RHS \rangle_{2} = 2$ or $-2$. Need to figure out signs. 
+\end{note*}
+
+
 
 
 
